@@ -3,45 +3,124 @@ channels:
 - defaults
 dependencies:
 - backports=1.0=py27_0
+- backports.shutil_get_terminal_size=1.0.0=py27h5bc021e_2
 - backports.weakref=1.0rc1=py27_0
+- backports_abc=0.5=py27h7b3c97b_0
 - bleach=1.5.0=py27_0
+- cairo=1.14.10=h58b644b_4
 - certifi=2016.2.28=py27_0
+- configparser=3.5.0=py27h5117587_0
+- decorator=4.1.2=py27h1544723_0
+- entrypoints=0.2.3=py27h502b47d_2
+- enum34=1.1.6=py27h99a27e9_1
+- fontconfig=2.12.4=h88586e7_1
+- freetype=2.8=h52ed37b_0
 - funcsigs=1.0.2=py27_0
+- functools32=3.2.3.2=py27h4ead58f_1
+- glib=2.53.6=hc861d11_1
+- gmp=6.1.2=hb3b607b_0
+- graphite2=1.3.10=hc526e54_0
 - h5py=2.7.0=np113py27_0
+- harfbuzz=1.5.0=h2545bd6_0
 - hdf5=1.8.17=2
 - html5lib=0.9999999=py27_0
+- icu=58.2=h211956c_0
+- ipykernel=4.6.1=py27hc93e584_0
+- ipython=5.4.1=py27h36c99b6_1
+- ipython_genutils=0.2.0=py27h89fb69b_0
+- ipywidgets=7.0.0=py27h4fda95d_0
+- jinja2=2.9.6=py27h82327ae_1
+- jsonschema=2.6.0=py27h7ed5aa4_0
+- jupyter=1.0.0=py27h505fd4b_0
+- jupyter_client=5.1.0=py27hbee1118_0
+- jupyter_console=5.2.0=py27hc6bee7e_1
+- jupyter_core=4.3.0=py27hcd9ae3a_0
 - keras=2.0.5=py27_0
+- libffi=3.2.1=h4deb6c0_3
+- libgcc-ng=7.2.0=hcbc56d2_1
 - libgfortran=3.0.0=1
 - libgpuarray=0.6.9=0
+- libpng=1.6.32=hda9c8bc_2
 - libprotobuf=3.4.0=0
+- libsodium=1.0.13=h31c71d8_2
+- libstdcxx-ng=7.2.0=h24385c6_1
+- libxcb=1.12=he6ee5dd_2
+- libxml2=2.9.4=h6b072ca_5
 - mako=1.0.6=py27_0
 - markdown=2.6.9=py27_0
 - markupsafe=1.0=py27_0
+- mistune=0.7.4=py27h6da7e90_0
 - mkl=2017.0.3=0
 - mkl-service=1.1.2=py27_3
 - mock=2.0.0=py27_0
+- nbconvert=5.3.1=py27he041f76_0
+- nbformat=4.4.0=py27hed7f2b2_0
 - nose=1.3.7=py27_1
+- notebook=5.0.0=py27h3661c2b_2
 - numpy=1.13.1=py27_0
 - openssl=1.0.2l=0
+- pandoc=1.19.2.1=hea2e7c5_1
+- pandocfilters=1.4.2=py27h428e1e5_1
+- pango=1.40.11=hedb6d6b_0
+- pathlib2=2.3.0=py27h6e9d198_0
 - pbr=1.10.0=py27_0
+- pcre=8.41=hc71a17e_0
+- pexpect=4.2.1=py27hcf82287_0
+- pickleshare=0.7.4=py27h09770e1_0
 - pip=9.0.1=py27_1
+- pixman=0.34.0=ha72d70b_1
+- prompt_toolkit=1.0.15=py27h1b593e1_0
 - protobuf=3.4.0=py27_0
+- ptyprocess=0.5.2=py27h4ccb14c_0
+- pygments=2.2.0=py27h4a8b6f5_0
 - pygpu=0.6.9=py27_0
+- pyqt=4.11.4=py27_4
 - python=2.7.13=0
+- python-dateutil=2.6.1=py27h4ca5741_1
 - pyyaml=3.12=py27_0
+- pyzmq=16.0.2=py27h297844f_2
+- qt=4.8.7=4
+- qtconsole=4.3.1=py27hc444b0d_0
 - readline=6.2=2
+- scandir=1.5=py27h1c9e1f8_1
 - scipy=0.19.1=np113py27_0
 - setuptools=36.4.0=py27_1
+- simplegeneric=0.8.1=py27h19e43cd_0
+- singledispatch=3.4.0.3=py27h9bcb476_0
+- sip=4.18=py27_0
 - six=1.10.0=py27_0
 - sqlite=3.13.0=0
+- ssl_match_hostname=3.5.0.1=py27h4ec10b9_2
 - tensorflow=1.3.0=0
 - tensorflow-base=1.3.0=py27_0
 - tensorflow-tensorboard=0.1.5=py27_0
+- terminado=0.6=py27h4be8df9_0
+- testpath=0.3.1=py27hc38d2c4_0
 - theano=0.9.0=py27_0
 - tk=8.5.18=0
+- tornado=4.5.2=py27h97b179f_0
+- traitlets=4.3.2=py27hd6ce930_0
+- wcwidth=0.1.7=py27h9e3e1ab_0
 - werkzeug=0.12.2=py27_0
 - wheel=0.29.0=py27_0
+- widgetsnbextension=3.0.2=py27hcb77dec_1
+- xz=5.2.3=h2bcbf08_1
 - yaml=0.1.6=0
+- zeromq=4.2.2=hb0b69da_1
 - zlib=1.2.11=0
+- pip:
+  - backports-abc==0.5
+  - backports.shutil-get-terminal-size==1.0.0
+  - backports.ssl-match-hostname==3.5.0.1
+  - chardet==3.0.4
+  - idna==2.6
+  - ipython-genutils==0.2.0
+  - jupyter-client==5.1.0
+  - jupyter-console==5.2.0
+  - jupyter-core==4.3.0
+  - prompt-toolkit==1.0.15
+  - pyglet==1.2.4
+  - requests==2.18.4
+  - urllib3==1.22
 prefix: /home/ubuntu/miniconda2/envs/minerl
 

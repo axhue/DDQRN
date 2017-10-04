@@ -98,11 +98,11 @@ while not world_state.has_mission_begun:
 
 
 while world_state.is_mission_running:
-    time.sleep(0.5)
+    time.sleep(2)
     world_state = agent_host.getWorldState()
     chose_act = random.choice(ractions)
-    print(chose_act)
-    print(world_state)
+    # print(chose_act)
+    print(world_state.observations)
     # agent_host.sendCommand(chose_act)
     for error in world_state.errors:
         print "Error:",error.text
