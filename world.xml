@@ -16,6 +16,20 @@
         <AgentHandlers>
             <ObservationFromFullStats/>
             <ContinuousMovementCommands turnSpeedDegs="180" />
+            <ObservationFromNearbyEntities>
+                <Range name="ents" xrange="5" yrange="5" zrange="5"/>
+            </ObservationFromNearbyEntities>
+            <ObservationFromGrid>
+                <Grid name="obs">
+                  <min x="-1" y="-1" z="-1"/>
+                  <max x="1" y="1" z="1"/>
+                </Grid>
+            </ObservationFromGrid>
+            <MissionQuitCommands quitDescription="quit via agent">
+                <ModifierList type="allow-list">
+                    <command>quit</command>
+                </ModifierList>
+            </MissionQuitCommands>
         </AgentHandlers>
     </AgentSection>
 </Mission>

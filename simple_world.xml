@@ -12,7 +12,7 @@
         </ServerInitialConditions>
         <ServerHandlers>
             <FlatWorldGenerator generatorString="3;7,220*1,5*3,2;3;,biome_1"/>
-            <ServerQuitFromTimeUp timeLimitMs="30000" />
+             <ServerQuitFromTimeUp timeLimitMs="30000" />
             <ServerQuitWhenAnyAgentFinishes/>
         </ServerHandlers>
     </ServerSection>
@@ -24,12 +24,17 @@
         <AgentHandlers>
             <ObservationFromFullStats/>
             <ObservationFromGrid>
-                <Grid name="floor3x3">
+                <Grid name="obs">
                   <min x="-1" y="-1" z="-1"/>
                   <max x="1" y="1" z="1"/>
                 </Grid>
             </ObservationFromGrid>
             <ContinuousMovementCommands turnSpeedDegs="180" />
+            <MissionQuitCommands quitDescription="quit via agent">
+                <ModifierList type="allow-list">
+                    <command>quit</command>
+                </ModifierList>
+            </MissionQuitCommands>
         </AgentHandlers>
     </AgentSection>
 </Mission>
