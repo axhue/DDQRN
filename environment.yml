@@ -31,7 +31,6 @@ dependencies:
 - ipywidgets=7.0.0=py27h4fda95d_0
 - jinja2=2.9.6=py27h82327ae_1
 - jsonschema=2.6.0=py27h7ed5aa4_0
-- jupyter=1.0.0=py27h505fd4b_0
 - jupyter_client=5.1.0=py27hbee1118_0
 - jupyter_console=5.2.0=py27hc6bee7e_1
 - jupyter_core=4.3.0=py27hcd9ae3a_0
