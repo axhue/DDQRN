@@ -61,7 +61,7 @@ for action_type in actions.keys():
 
 
 # load world
-with open('simple_world.xml','r') as f:
+with open('CliffWalking.xml','r') as f:
     my_mission = MalmoPython.MissionSpec(f.read(), True)
 my_mission_record = MalmoPython.MissionRecordSpec()
 
