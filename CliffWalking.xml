@@ -6,7 +6,7 @@
   </About>
   
   <ModSettings>
-    <MsPerTick>1</MsPerTick>
+    <!--<MsPerTick>1</MsPerTick>-->
   </ModSettings>
 
   <ServerSection>
@@ -29,7 +29,7 @@
         <DrawBlock   x="4"   y="45"  z="12" type="lapis_block" />                           <!-- the destination marker -->
         <DrawItem    x="4"   y="46"  z="12" type="diamond" />                               <!-- another destination marker -->
       </DrawingDecorator>
-      <ServerQuitFromTimeUp timeLimitMs="2000"/>
+      <ServerQuitFromTimeUp timeLimitMs="50000"/>
       <ServerQuitWhenAnyAgentFinishes/>
     </ServerHandlers>
   </ServerSection>
