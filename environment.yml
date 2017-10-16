@@ -105,3 +105,4 @@ dependencies:
   - prompt-toolkit==1.0.15
 prefix: /home/ubuntu/miniconda2/envs/mine-env
 
+Fetching package metadata ...

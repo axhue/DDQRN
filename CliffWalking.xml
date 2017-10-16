@@ -6,7 +6,7 @@
   </About>
   
   <ModSettings>
-    <MsPerTick>1</MsPerTick>
+    <!--<MsPerTick>1</MsPerTick>-->
   </ModSettings>
 
   <ServerSection>
