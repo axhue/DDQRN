@@ -73,10 +73,11 @@
             <ObservationFromNearbyEntities>
                 <Range name="entities" xrange="8" yrange="2" zrange="6"/>
             </ObservationFromNearbyEntities>
+            <ObservationFromRay/>
             <ObservationFromGrid>
-                <Grid name="board" absoluteCoords="true">
-                    <min x="0" y="3" z="-1"/>
-                    <max x="8" y="3" z="7"/>
+                <Grid name="grid">
+                    <min x="-3" y="-1" z="-3"/>
+                    <max x="3" y="-1" z="3"/>
                 </Grid>
             </ObservationFromGrid>
             <ObservationFromFullStats/>

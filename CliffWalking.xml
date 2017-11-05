@@ -6,7 +6,7 @@
   </About>
   
   <ModSettings>
-    <!--<MsPerTick>1</MsPerTick>-->
+      <!--<MsPerTick>1</MsPerTick>-->
   </ModSettings>
 
   <ServerSection>
@@ -26,7 +26,7 @@
         <DrawCuboid x1="-2" y1="45" z1="-2" x2="7" y2="45" z2="18" type="lava" />           <!-- lava floor -->
         <DrawCuboid x1="1"  y1="45" z1="1"  x2="3" y2="45" z2="12" type="sandstone" />      <!-- floor of the arena -->
         <DrawBlock   x="4"   y="45"  z="1"  type="cobblestone" />                           <!-- the starting marker -->
-        <DrawBlock   x="4"   y="45"  z="12" type="lapis_block" />                           <!-- the destination marker -->
+        <DrawBlock   x="2"   y="45"  z="12" type="lapis_block" />                           <!-- the destination marker -->
         <DrawItem    x="4"   y="46"  z="12" type="diamond" />                               <!-- another destination marker -->
       </DrawingDecorator>
       <ServerQuitFromTimeUp timeLimitMs="50000"/>
@@ -43,12 +43,12 @@
       <ObservationFromFullStats/>
       <ContinuousMovementCommands turnSpeedDegs="180" />
       <RewardForTouchingBlockType>
-        <Block reward="-100.0" type="lava" behaviour="onceOnly"/>
-        <Block reward="100.0" type="lapis_block" behaviour="onceOnly"/>
+        <Block reward="-10000.0" type="lava" behaviour="onceOnly"/>
+        <Block reward="10000.0" type="lapis_block" behaviour="onceOnly"/>
       </RewardForTouchingBlockType>
-      <RewardForSendingCommand reward="-1"/>
+      <RewardForSendingCommand reward="0"/>
+       
       <AgentQuitFromTouchingBlockType>
-          <Block type="lava" />
           <Block type="lapis_block" />
       </AgentQuitFromTouchingBlockType>
       <MissionQuitCommands quitDescription="quit via agent">
@@ -59,8 +59,8 @@
       
       <ObservationFromGrid>
         <Grid name="grid">
-            <min x="-2" y="-1" z="-2"/>
-            <max x="2" y="0" z="2"/>
+            <min x="-10" y="-1" z="-10"/>
+            <max x="10" y="-1" z="10"/>
         </Grid>
       </ObservationFromGrid>
     </AgentHandlers>

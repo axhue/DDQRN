@@ -1,108 +1,168 @@
-name: mine-env
+name: casper
 channels:
 - conda-forge
 - defaults
 dependencies:
-- backports.shutil_get_terminal_size=1.0.0=py_3
-- backports_abc=0.5=py27_0
-- configparser=3.5.0=py27_0
-- decorator=4.1.2=py27_0
-- entrypoints=0.2.3=py27_1
-- enum34=1.1.6=py27_1
-- functools32=3.2.3.2=py27_1
-- gmp=6.1.2=0
-- ipykernel=4.6.1=py27_0
-- ipython=5.5.0=py27_0
-- ipython_genutils=0.2.0=py27_0
-- jinja2=2.9.6=py27_0
-- jsonschema=2.6.0=py27_0
-- jupyter_client=5.1.0=py27_0
-- jupyter_core=4.3.0=py27_0
-- libsodium=1.0.10=0
-- mistune=0.7.4=py27_0
-- nb_conda_kernels=2.1.0=py27_0
-- nbconvert=5.3.1=py_1
-- nbformat=4.4.0=py27_0
-- notebook=5.1.0=py27_0
-- pandoc=1.19.2=0
-- pandocfilters=1.4.1=py27_0
-- pathlib2=2.3.0=py27_0
-- pexpect=4.2.1=py27_0
-- pickleshare=0.7.4=py27_0
-- prompt_toolkit=1.0.15=py27_0
-- ptyprocess=0.5.2=py27_0
-- pygments=2.2.0=py27_0
-- python-dateutil=2.6.1=py27_0
-- pyzmq=16.0.2=py27_2
-- scandir=1.6=py27_0
-- simplegeneric=0.8.1=py27_0
-- singledispatch=3.4.0.3=py27_0
-- ssl_match_hostname=3.5.0.1=py27_1
-- terminado=0.6=py27_0
-- testpath=0.3.1=py27_0
-- tornado=4.5.2=py27_0
-- traitlets=4.3.2=py27_0
-- wcwidth=0.1.7=py27_0
-- zeromq=4.2.1=1
-- backports=1.0=py27h63c9359_1
-- backports.weakref=1.0rc1=py27_0
-- bleach=1.5.0=py27_0
+- icu=58.1=1
+- jupyter_contrib_core=0.3.3=py35_0
+- jupyter_contrib_nbextensions=0.3.3=py35_0
+- jupyter_highlight_selected_word=0.0.11=py35_0
+- jupyter_latex_envs=1.3.8.2=py35_1
+- jupyter_nbextensions_configurator=0.2.8=py35_0
+- libiconv=1.14=4
+- libxml2=2.9.5=0
+- libxslt=1.1.29=5
+- lxml=4.1.0=py35_0
+- _nb_ext_conf=0.4.0=py35_1
+- anaconda-client=1.6.5=py35hd900ed1_0
+- asn1crypto=0.22.0=py35h0d675fe_1
+- backports=1.0=py35hd471ac7_1
+- backports.weakref=1.0rc1=py35_0
+- bleach=1.5.0=py35_0
+- bokeh=0.12.10=py35hfdb0b1d_0
 - ca-certificates=2017.08.26=h1d4fec5_0
-- certifi=2017.7.27.1=py27h9ceb091_0
-- funcsigs=1.0.2=py27h83f16ab_0
-- h5py=2.7.0=py27h71d1790_1
+- certifi=2017.7.27.1=py35h19f42a1_0
+- cffi=1.10.0=py35h796c292_1
+- chardet=3.0.4=py35hb6e9ddf_1
+- clyent=1.2.2=py35h491ffcb_1
+- cryptography=2.0.3=py35hef72dfd_1
+- cudatoolkit=8.0=3
+- cudnn=6.0.21=cuda8.0_0
+- decorator=4.1.2=py35h3a268aa_0
+- entrypoints=0.2.3=py35h48174a2_2
+- gmp=6.1.2=hb3b607b_0
+- h5py=2.7.0=py35h41d5d6e_1
 - hdf5=1.10.1=hb0523eb_0
-- html5lib=0.9999999=py27_0
+- html5lib=0.9999999=py35_0
+- idna=2.6=py35h8605a33_1
 - intel-openmp=2018.0.0=h15fc484_7
-- keras=2.0.5=py27_0
+- ipykernel=4.6.1=py35h29d130c_0
+- ipython=6.1.0=py35h1b71439_1
+- ipython_genutils=0.2.0=py35hc9e07d0_0
+- ipywidgets=7.0.0=py35h8ebd919_0
+- jedi=0.10.2=py35hc33c70f_0
+- jinja2=2.9.6=py35h90b8645_1
+- jsonschema=2.6.0=py35h4395190_0
+- jupyter_client=5.1.0=py35h2bff583_0
+- jupyter_core=4.3.0=py35he2f7985_0
+- keras=2.0.5=py35_0
 - libedit=3.1=heed3624_0
 - libffi=3.2.1=h4deb6c0_3
-- libgcc-ng=7.2.0=hcbc56d2_1
-- libgfortran-ng=7.2.0=h6fcbd8e_1
+- libgcc=7.2.0=h69d50b8_2
+- libgcc-ng=7.2.0=h7cc24e2_2
+- libgfortran=3.0.0=1
+- libgfortran-ng=7.2.0=h9f7466a_2
 - libgpuarray=0.6.9=0
 - libprotobuf=3.4.0=0
-- libstdcxx-ng=7.2.0=h24385c6_1
-- mako=1.0.7=py27h3d58d4b_0
-- markdown=2.6.9=py27_0
-- markupsafe=1.0=py27h97b2822_1
-- mkl=2018.0.0=hb491cac_4
-- mkl-service=1.1.2=py27hb2d42c5_4
-- mock=2.0.0=py27_0
-- nb_conda=2.2.1=py27hec22543_0
+- libsodium=1.0.13=h31c71d8_2
+- libstdcxx-ng=7.2.0=h7a57d05_2
+- mako=1.0.7=py35h69899ea_0
+- markdown=2.6.9=py35_0
+- markupsafe=1.0=py35h4f4fcf6_1
+- mistune=0.7.4=py35hfd0f961_0
+- mkl=2017.0.3=0
+- mkl-service=1.1.2=py35_3
+- nb_anacondacloud=1.4.0=py35_0
+- nb_conda=2.2.1=py35hccc8299_0
+- nb_conda_kernels=2.1.0=py35_0
+- nbconvert=5.3.1=py35hc5194e3_0
+- nbformat=4.4.0=py35h12e6e07_0
+- nbpresent=3.0.2=py35h9c03491_1
+- nccl=1.3.4=cuda8.0_1
 - ncurses=6.0=h06874d7_1
-- nose=1.3.7=py27heec2199_2
-- numpy=1.13.1=py27hd1b6e02_2
-- openssl=1.0.2l=h9d1a558_3
-- pbr=3.1.1=py27hf64632f_0
-- pip=9.0.1=py27hbf658b2_3
-- protobuf=3.4.0=py27_0
-- pygpu=0.6.9=py27_0
-- python=2.7.14=h435b27a_18
-- pyyaml=3.12=py27h2d70dd7_1
+- nose=1.3.7=py35hdc64897_2
+- notebook=5.0.0=py35h65c930e_2
+- numpy=1.13.1=py35_0
+- openssl=1.0.2l=h077ae2c_5
+- pandoc=1.19.2.1=hea2e7c5_1
+- pandocfilters=1.4.2=py35h1565a15_1
+- pexpect=4.2.1=py35h8b56cb4_0
+- pickleshare=0.7.4=py35hd57304d_0
+- pip=9.0.1=py35haa8ec2a_3
+- prompt_toolkit=1.0.15=py35hc09de7a_0
+- protobuf=3.4.0=py35_0
+- ptyprocess=0.5.2=py35h38ce0a3_0
+- pycparser=2.18=py35h61b3040_1
+- pygments=2.2.0=py35h0f41973_0
+- pygpu=0.6.9=py35_0
+- pyopenssl=17.2.0=py35h1d2a76c_0
+- pysocks=1.6.7=py35h6aefbb0_1
+- python=3.5.4=he2c66cf_20
+- python-dateutil=2.6.1=py35h90d5b31_1
+- pytorch=0.1.12=py35cuda8.0cudnn6.0_1
+- pytz=2017.2=py35h9225bff_1
+- pyyaml=3.12=py35h46ef4ae_1
+- pyzmq=16.0.2=py35h4be1f71_2
 - readline=7.0=hac23ff0_3
-- scipy=0.19.1=py27h1edc525_3
-- setuptools=36.5.0=py27h68b189e_0
-- six=1.10.0=py27hdcd7534_1
+- requests=2.18.4=py35hb9e6ad1_1
+- scipy=0.19.1=np113py35_0
+- setuptools=36.5.0=py35ha8c1747_0
+- simplegeneric=0.8.1=py35h2ec4104_0
+- six=1.10.0=py35h5312c1b_1
 - sqlite=3.20.1=h6d8b0f3_1
 - tensorflow=1.3.0=0
-- tensorflow-base=1.3.0=py27_0
-- tensorflow-tensorboard=0.1.5=py27_0
-- theano=0.9.0=py27_0
+- tensorflow-base=1.3.0=py35h79a3156_1
+- tensorflow-tensorboard=0.1.5=py35_0
+- terminado=0.6=py35hce234ed_0
+- testpath=0.3.1=py35had42eaf_0
+- theano=0.9.0=py35_0
 - tk=8.6.7=h5979e9b_1
-- werkzeug=0.12.2=py27hbf75dff_0
-- wheel=0.29.0=py27h411dd7b_1
+- tornado=4.5.2=py35hf879e1d_0
+- traitlets=4.3.2=py35ha522a97_0
+- urllib3=1.22=py35h2ab6e29_0
+- wcwidth=0.1.7=py35hcd08066_0
+- werkzeug=0.12.2=py35hbfc1ea6_0
+- wheel=0.29.0=py35h601ca99_1
+- widgetsnbextension=3.0.2=py35h0be620c_1
+- xz=5.2.3=h2bcbf08_1
 - yaml=0.1.7=h96e3832_1
+- zeromq=4.2.2=hb0b69da_1
 - zlib=1.2.11=hfbfcf68_1
 - pip:
-  - backports-abc==0.5
-  - backports.shutil-get-terminal-size==1.0.0
-  - backports.ssl-match-hostname==3.5.0.1
+  - atari-py==0.1.1
+  - azure==1.0.3
+  - azure-common==1.1.8
+  - azure-mgmt==0.20.2
+  - azure-mgmt-common==0.20.0
+  - azure-mgmt-compute==0.20.1
+  - azure-mgmt-network==0.20.1
+  - azure-mgmt-nspkg==2.0.0
+  - azure-mgmt-resource==0.20.1
+  - azure-mgmt-storage==0.20.0
+  - azure-nspkg==2.0.0
+  - azure-servicebus==0.20.1
+  - azure-servicemanagement-legacy==0.20.2
+  - azure-storage==0.20.3
+  - baselines (/home/ubuntu/baselines)==0.1.4
+  - dill==0.2.7.1
+  - future==0.16.0
+  - gym==0.9.4
+  - imageio==2.2.0
   - ipython-genutils==0.2.0
+  - joblib==0.11
   - jupyter-client==5.1.0
+  - jupyter-contrib-core==0.3.3
+  - jupyter-contrib-nbextensions==0.3.3
   - jupyter-core==4.3.0
+  - jupyter-highlight-selected-word==0.0.11
+  - jupyter-latex-envs==1.3.8.2
+  - jupyter-nbextensions-configurator==0.2.8
+  - malmopy (/home/ubuntu/baselines/baselines/deepq/src/malmopy)==0.1.0
+  - mpi4py==2.0.0
+  - mujoco-py==0.5.7
+  - nb-anacondacloud==1.4.0
   - nb-conda==2.2.1
   - nb-conda-kernels==2.1.0
+  - olefile==0.44
+  - pandas==0.20.3
+  - pillow==4.3.0
+  - progressbar2==3.34.3
   - prompt-toolkit==1.0.15
-prefix: /home/ubuntu/miniconda2/envs/mine-env
+  - pyglet==1.2.4
+  - pyopengl==3.1.0
+  - python-utils==2.2.0
+  - torch==0.1.12.post1
+  - tqdm==4.19.4
+  - zmq==0.0.0
+prefix: /home/ubuntu/miniconda2/envs/casper
 
-Fetching package metadata ...
