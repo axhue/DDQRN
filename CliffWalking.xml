@@ -7,6 +7,7 @@
   
   <ModSettings>
       <!--<MsPerTick>1</MsPerTick>-->
+      <!--<PrioritiseOffscreenRendering>true</PrioritiseOffscreenRendering>-->
   </ModSettings>
 
   <ServerSection>
@@ -35,19 +36,28 @@
   </ServerSection>
 
   <AgentSection mode="Survival">
-    <Name>Cristina</Name>
+    <Name>Peter</Name>
     <AgentStart>
       <Placement x="4.5" y="46.0" z="1.5"/>
     </AgentStart>
     <AgentHandlers>
+        <VideoProducer want_depth="false">
+            <Width>420</Width>
+            <Height>300</Height>
+        </VideoProducer>
+      <RewardForMissionEnd rewardForDeath="-9000.0">
+          <Reward reward="-200.0" description="death"></Reward>
+      </RewardForMissionEnd>
       <ObservationFromFullStats/>
       <ContinuousMovementCommands turnSpeedDegs="180" />
+      
+      <!--
       <RewardForTouchingBlockType>
         <Block reward="-10000.0" type="lava" behaviour="onceOnly"/>
         <Block reward="10000.0" type="lapis_block" behaviour="onceOnly"/>
       </RewardForTouchingBlockType>
       <RewardForSendingCommand reward="0"/>
-       
+       -->
       <AgentQuitFromTouchingBlockType>
           <Block type="lapis_block" />
       </AgentQuitFromTouchingBlockType>
@@ -59,8 +69,8 @@
       
       <ObservationFromGrid>
         <Grid name="grid">
-            <min x="-10" y="-1" z="-10"/>
-            <max x="10" y="-1" z="10"/>
+            <min x="-30" y="-1" z="-30"/>
+            <max x="30" y="-1" z="30"/>
         </Grid>
       </ObservationFromGrid>
     </AgentHandlers>
