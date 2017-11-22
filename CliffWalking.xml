@@ -51,13 +51,15 @@
       <ObservationFromFullStats/>
       <ContinuousMovementCommands turnSpeedDegs="180" />
       
-      <!--
+      
       <RewardForTouchingBlockType>
-        <Block reward="-10000.0" type="lava" behaviour="onceOnly"/>
-        <Block reward="10000.0" type="lapis_block" behaviour="onceOnly"/>
+        <Block reward="-100.0" type="lava" behaviour="constant"/>
+        <Block reward="100.0" type="lapis_block" behaviour="constant"/>
       </RewardForTouchingBlockType>
-      <RewardForSendingCommand reward="0"/>
-       -->
+      
+        
+      <!--<RewardForSendingCommand reward="0"/>-->
+       
       <AgentQuitFromTouchingBlockType>
           <Block type="lapis_block" />
       </AgentQuitFromTouchingBlockType>
@@ -69,8 +71,8 @@
       
       <ObservationFromGrid>
         <Grid name="grid">
-            <min x="-30" y="-1" z="-30"/>
-            <max x="30" y="-1" z="30"/>
+            <min x="-20" y="-1" z="-20"/>
+            <max x="20" y="-1" z="20"/>
         </Grid>
       </ObservationFromGrid>
     </AgentHandlers>
