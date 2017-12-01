@@ -6,8 +6,8 @@
   </About>
   
   <ModSettings>
-      <!--<MsPerTick>1</MsPerTick>-->
-      <!--<PrioritiseOffscreenRendering>true</PrioritiseOffscreenRendering>-->
+      <MsPerTick>1</MsPerTick>
+      <PrioritiseOffscreenRendering>true</PrioritiseOffscreenRendering>
   </ModSettings>
 
   <ServerSection>
@@ -54,11 +54,11 @@
       
       <RewardForTouchingBlockType>
         <Block reward="-100.0" type="lava" behaviour="constant"/>
-        <Block reward="100.0" type="lapis_block" behaviour="constant"/>
+        <Block reward="1000.0" type="lapis_block" behaviour="constant"/>
       </RewardForTouchingBlockType>
       
         
-      <!--<RewardForSendingCommand reward="0"/>-->
+      <RewardForSendingCommand reward="1"/>
        
       <AgentQuitFromTouchingBlockType>
           <Block type="lapis_block" />
