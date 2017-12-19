@@ -45,22 +45,23 @@
             <Width>420</Width>
             <Height>300</Height>
         </VideoProducer>
-      <RewardForMissionEnd rewardForDeath="-9000.0">
-          <Reward reward="-200.0" description="death"></Reward>
-      </RewardForMissionEnd>
+      <RewardForMissionEnd rewardForDeath="-100">
+		  <Reward description="found_goal" reward="100"/>
+      </RewardForMissionEnd>   
       <ObservationFromFullStats/>
       <ContinuousMovementCommands turnSpeedDegs="180" />
       
       
       <RewardForTouchingBlockType>
-        <Block reward="-100.0" type="lava" behaviour="constant"/>
-        <Block reward="1000.0" type="lapis_block" behaviour="constant"/>
+        <Block reward="-100.0" type="lava" behaviour="onceOnly"/>
+        <Block reward="100.0" type="lapis_block" behaviour="onceOnly"/>
       </RewardForTouchingBlockType>
       
         
-      <RewardForSendingCommand reward="1"/>
+      <RewardForSendingCommand reward="-1"/>
        
       <AgentQuitFromTouchingBlockType>
+          <Block type="lava" />
           <Block type="lapis_block" />
       </AgentQuitFromTouchingBlockType>
       <MissionQuitCommands quitDescription="quit via agent">
