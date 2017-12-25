@@ -25,7 +25,6 @@ class MinecraftWrapper(gym.Wrapper):
         #self.frames = deque(maxlen=k)
         #self.observation_space = spaces.Box(0, 255, shape=(h, w, 1))
         self.scale = scale
-        scale = 1/12 # scale image down by 1/12
         newshape = (env.video_height*scale,env.video_width*scale,1) # dimension of 1 for grayscale
         newshape = tuple(map(int,newshape))
 
