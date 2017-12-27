@@ -19,7 +19,7 @@ import gym_minecraft
 from gym.wrappers import Monitor
 
 class MinecraftWrapper(gym.Wrapper):
-    def __init__(self, env, scale=1/12):
+    def __init__(self, env, scale=1/12,grid_shape=None):
         gym.Wrapper.__init__(self, env)
         #self.k = k
         #self.frames = deque(maxlen=k)
@@ -27,6 +27,7 @@ class MinecraftWrapper(gym.Wrapper):
         self.scale = scale
         newshape = (env.video_height*scale,env.video_width*scale,1) # dimension of 1 for grayscale
         newshape = tuple(map(int,newshape))
+        self.grid_shape = grid_shape
 
         # the pre processor will adjust the observation space therefore we will edit the property of the environment to take the pre processor into accoutn
         self.observation_space = gym.spaces.Box(low=0, high=255,
@@ -44,10 +45,27 @@ class MinecraftWrapper(gym.Wrapper):
         obs = self.env.reset()
         obs = self._preprocess(obs)
         return obs
+    def _process_reward(self,info):
+        pass
+        '''
+        try:
+            if not info:
+                return 0
+            elif 'observation' not in info.keys():
+                return 0
 
+            elif 'distanceFromdist' in info['observation'].keys():
+                return 10/(0.001 + info['observation']['distanceFromdist'])
+            else:
+                return 0
+        except:
+            print(info)
+            raise
+        '''
     def _step(self, action):
         ob, reward, done, info = self.env.step(action)
         ob = self._preprocess(ob)
+        #reward += self._process_reward(info)
         return ob, reward, done, info
 
     def _observation(self):
