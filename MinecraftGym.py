@@ -43,7 +43,7 @@ class MinecraftWrapper(gym.Wrapper):
     def _reset(self):
         obs = self.env.reset()
         obs = self._preprocess(obs)
-        return self._observation()
+        return obs
 
     def _step(self, action):
         ob, reward, done, info = self.env.step(action)
