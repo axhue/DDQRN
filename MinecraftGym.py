@@ -46,26 +46,21 @@ class MinecraftWrapper(gym.Wrapper):
         obs = self._preprocess(obs)
         return obs
     def _process_reward(self,info):
-        pass
-        '''
-        try:
-            if not info:
-                return 0
-            elif 'observation' not in info.keys():
-                return 0
+        if info is None:
+            return 0
+        elif 'observation' not in info.keys():
+            return 0
+        elif info['observation'] is None:
+            return 0
+        elif 'distanceFromdist' in info['observation'].keys():
+            return 10/(0.001 + info['observation']['distanceFromdist'])
+        else:
+            return 0
 
-            elif 'distanceFromdist' in info['observation'].keys():
-                return 10/(0.001 + info['observation']['distanceFromdist'])
-            else:
-                return 0
-        except:
-            print(info)
-            raise
-        '''
     def _step(self, action):
         ob, reward, done, info = self.env.step(action)
         ob = self._preprocess(ob)
-        #reward += self._process_reward(info)
+        reward += self._process_reward(info)
         return ob, reward, done, info
 
     def _observation(self):
