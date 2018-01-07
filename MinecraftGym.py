@@ -37,7 +37,7 @@ class MinecraftWrapper(gym.Wrapper):
         frame = np.array(rgb_array)
         gray_frame = np.dot(frame[...,:3],[0.299,0.587,0.114]).reshape((frame_shape[0],frame_shape[1]))
         smaller = scimisc.imresize(gray_frame,self.scale,mode='L').astype('float64')
-        #smaller /= 255.0
+        smaller /= 255.0
         smaller = np.expand_dims(smaller,2) # convert to a 3D array of shape (height,width,grayscale)
         return smaller
 
