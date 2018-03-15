@@ -164,17 +164,24 @@ class Agent:
 
         self.final_model = Model(inputs = [state, action_mask], outputs = qa_value)
         self.final_model.compile(loss=loss_func, optimizer=optimizer)
+    def act2(self, s, episode=0):
+        # Epsilon greedy action selection
+        s = s[None] # increase the rank of tensor to have a batch_size of 1 and length 1
+        if episode >= self.train_start:
+            self.epsilon_policy.update()
+        if np.random.rand() <= self.epsilon_policy.epsilon:
+            return random.randrange(self.actionCnt)
+        act_values = self.model.predict_on_batch(s)
+        return np.argmax(act_values[0]) # returns action
 
     def act(self, s):
         # expect s.shape = (frames,height,width,depth)
         # Epsilon greedy action selection
         s = s[None] # increase the rank of tensor to have a batch_size of 1 and length 1
         self.epsilon_policy.update()
-        self.save_scalar(self.epsilon_policy.step,'train/epsilon',self.epsilon_policy.epsilon)
-        if np.random.rand() < self.epsilon_policy.epsilon:
+        if np.random.rand() <= self.epsilon_policy.epsilon:
             return random.randrange(self.actionCnt)
-        else:
-            act_values = self.model.predict_on_batch(s)
+        act_values = self.model.predict_on_batch(s)
         return np.argmax(act_values[0]) # returns action
     def replay(self,batch_size):
         prebatch_s,batch_a,batch_r,prebatch_s_,batch_done = self.longmem.sample(batch_size)# a batch of episode of parameter length
@@ -275,9 +282,9 @@ class Agent:
                 self.longmem.add(last_frame, action, 0, done)
                 if not burn_in:
                     avg_target_value = episode_target_value / episode_frames
-                    print(">>> Training: time %d, episode %d, length %d, reward %.0f, raw_reward %.0f, loss %.4f, target value %.4f, epsilon1 %d, memory cap %d" % 
+                    print(">>> Training: time %d, episode %d, length %d, reward %.0f, raw_reward %.0f, loss %.4f, target value %.4f, policy step %d, memory cap %d" % 
                         (t, idx_episode, episode_frames, episode_reward, episode_raw_reward, episode_loss, 
-                        avg_target_value, self.epsilon_policy.epsilon, self.longmem.current))
+                        avg_target_value, 0, self.longmem.current))
                     sys.stdout.flush()
                     self.save_scalar(idx_episode, 'train/episode_frames', episode_frames)
                     self.save_scalar(idx_episode, 'train/episode_reward', episode_reward)
@@ -312,6 +319,73 @@ class Agent:
                     self.save_model()
 
         self.save_model()
+    def train2(self,env,episodes,render = False):
+        e_idx = 0
+        # play loop
+        print("Training")
+        for e in range(episodes):
+            # stats
+            e_loss = .0
+            e_length = .0
+            e_r = .0
+            e_raw_r = .0
+            e_target_val = .0
+            
+            
+            #agent.model.reset_states()
+            pre_s = env.reset()
+
+            done = False
+            self.shortmem.forget() # forget short term memory for recurrent network 
+
+            if e % 40 == 0:
+                self.save_model()
+            for t in itertools.count():
+                mem_s = self.preprocessor.process_state_for_memory(pre_s) #scaled and grayscaled
+                net_s = self.preprocessor.process_for_network(mem_s) # normalized
+                
+                self.shortmem.add(net_s)
+                hist_s = self.shortmem.get() # receive the last frames including the most recent frame to make a tensor shape (num_frames,frame_dim)
+                # take action using net_s and receive a
+                a = self.act2(hist_s,e)
+                if render:
+                    env.render()
+
+                pre_s_, raw_r, done, info = env.step(a)
+                
+                r = self.preprocessor.process_reward(raw_r) # reward clipping
+                mem_s_ = self.preprocessor.process_state_for_memory(pre_s_) #scaled and grayscaled
+                net_s_ = self.preprocessor.process_for_network(mem_s_) # normalized
+                
+                self.shortmem.add(net_s_)
+                self.remember(mem_s,a,r,done)
+                
+                # collect stats
+                e_raw_r += raw_r
+                e_r += r
+                
+                pre_s = pre_s_
+                if e > self.train_start:
+                    
+                    if t % (self.train_freq *self.target_update_freq) == 0:
+                        self.update_target_model()
+                    
+                    if t % self.train_freq == 0  :
+                        loss, avg_target = self.replay(self.batch_size)
+                        e_loss += loss
+                        e_target_val += avg_target
+                
+                if done:
+                    print("Training: episode %d, length %d, reward %.0f, raw_reward %.0f, loss %.4f, target value %.4f,, memory cap %d" % 
+                        (e, t, e_r, e_raw_r, e_loss, e_target_val/t, self.longmem.current))
+                    if e > self.train_start:
+                        e_idx += 1
+                        self.save_scalar(e_idx,"train/episode_reward",e_r)
+                        self.save_scalar(e_idx,"train/episode_raw_reward",e_raw_r)
+                        self.save_scalar(e_idx,"train/episode_frames",t)
+                        self.save_scalar(e_idx,"train/episode_loss",e_loss)
+                        self.save_scalar(e_idx,"train_avg/avg_target_value",e_target_val/t)
+                    break
     def init_loop(self,env):
         print("Filling memory with {} episodes".format(self.train_start))
         # intializing loop to fill memory
@@ -402,15 +476,15 @@ class Agent:
                     e_target_val += avg_target
                 
                   
-                pre_s = pre_s_ #loop state back
+                pre_s = pre_s_
                 if done:
                     #capture last frame
                     last_frame = self.preprocessor.process_state_for_memory(pre_s_)
                     self.remember(last_frame,a,0,done)
                     
-                    #broadcast statsj
-                    print("Training: episode %d, length %d, reward %.0f, raw_reward %.0f, loss %.4f, target value %.4f,epsilon %d, memory cap %d" % 
-                        (e, t, e_r, e_raw_r, e_loss, e_target_val/t, self.epsilon_policy.epsilon,self.longmem.current))
+                    #broadcast stats
+                    print("Training: episode %d, length %d, reward %.0f, raw_reward %.0f, loss %.4f, target value %.4f,, memory cap %d" % 
+                        (e, t, e_r, e_raw_r, e_loss, e_target_val/t, self.longmem.current))
                     self.save_scalar(e,"train/episode_reward",e_r)
                     self.save_scalar(e,"train/episode_raw_reward",e_raw_r)
                     self.save_scalar(e,"train/episode_frames",t)

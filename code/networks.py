@@ -3,7 +3,7 @@ from keras.layers import Conv2D,LSTM,GRU,TimeDistributed,Dense,Flatten,Input,Lam
 from keras.optimizers import RMSprop,Adam
 from keras import backend as K
 import tensorflow as tf
-from loss import mean_huber_loss
+from .loss import mean_huber_loss
 
 
 class Network:
@@ -20,7 +20,7 @@ class Network:
     def build2(self):
         with tf.variable_scope(self.name+'-'+self.mode):
             inpt = Input(shape = self.stateCnt, name = "input")
-            if self.mode == "linear":
+            if self.mode == "linear":                   
                 flatten_hidden = Flatten(name = "flatten")(input_data)
                 output = Dense(num_actions, name = "output")(flatten_hidden)
             else:
@@ -49,8 +49,3 @@ class Network:
             #model.compile(loss=mean_huber_loss,optimizer=Adam(lr=self.learning_rate))
             return model
             
-
-if __name__ == '__main__':
-    test = Network((10,80,80,1),6,True,'duel',0.001,"Test-Network").build2()
-    test.compile(loss=mean_huber_loss,optimizer=Adam(lr=0.001))
-    time.sleep(15)

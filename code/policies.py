@@ -63,9 +63,8 @@ class LinearDecayGreedyEpsilonPolicy(Policy):
           Selected action.
         """
         epsilon = self.start_value
-        if is_training:
-            epsilon += self.decay_rate * self.step
-            self.step += 1
+        epsilon += self.decay_rate * self.step
+        self.step += 1
         self.epsilon = max(epsilon, self.end_value)
 
     def reset(self):
