@@ -3,17 +3,35 @@ A Dueling Double Deep Q Recurrent Network implemented to play video games!
 
 
 ## Source papers
-[Human-level control through deep reinforcement learning ](https://www.nature.com/articles/nature14236)
-[Dueling Network Architectures for Deep Reinforcement Learning ](https://arxiv.org/abs/1511.06581)
-[Deep Reinforcement Learning with Double Q-learning](https://arxiv.org/abs/1509.06461)
-[Deep Recurrent Q-Learning for Partially Observable MDPs](https://arxiv.org/abs/1507.06527)
+ * [Human-level control through deep reinforcement learning ](https://www.nature.com/articles/nature14236)
+ * [Dueling Network Architectures for Deep Reinforcement Learning ](https://arxiv.org/abs/1511.06581)
+ * [Deep Reinforcement Learning with Double Q-learning](https://arxiv.org/abs/1509.06461)
+ * [Deep Recurrent Q-Learning for Partially Observable MDPs](https://arxiv.org/abs/1507.06527)
 
 
 ## Results
 
-Pending!
+### Seaquest
+![Playing Seaquest](https://github.com/axhue/minecraftRL/blob/master/results/Seaquest-R20-DDQRN.gif)
 
+And the rewards per episode (runtime was 2 days on P100)
 
+![Rewards Graph](https://github.com/axhue/minecraftRL/blob/master/results/Seaquest-rewards-DDRQN20.png)
+### Qbert
+![Playing Qbert](https://github.com/axhue/minecraftRL/blob/master/results/QbertR20-results.gif)
+
+And the rewards per episode (runtime was 2 days on P100)
+
+![Rewards Graph](https://github.com/axhue/minecraftRL/blob/master/results/Qbert-rewards-DDRQN20.png)
+
+## How to run the code
+First you need to create the conda environment `conda env create -f environment.yml` and activate
+
+then you may adjust the parameters setup in execute.py
+
+finally `python execute.py`
+
+the code's default directory for tensorboard data is ./logs, to read these logs you need to run `tensorboard --logdir=./logs`
 ## Next up!
  * Attention Mechanisms
  * Hindsight Experience Replay
