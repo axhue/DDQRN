@@ -2,7 +2,7 @@ import numpy as np
 class Memory():
     def __init__(self,capacity,hist_len,s_dim):
         '''
-        capacity: how many episodes to store?
+        capacity: how many frames to store?
         hist_len: what is the history length of each episode?
         s_dim: the size of your state in a tuple ex. (80,80,1) 
         '''

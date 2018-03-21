@@ -15,8 +15,9 @@ from keras.layers.wrappers import Bidirectional
 from keras.callbacks import TensorBoard
 
 from .memory import Memory,ShortMemory
-from .networks import Network
+from .networks import CNNNetwork
 from .loss import mean_huber_loss
+from .utils import gif
 import random
 
 config = tf.ConfigProto()
@@ -94,8 +95,8 @@ class Agent:
         # build network
         inpt = (cfg.num_frames,) + self.stateCnt
         self.net_inpt = inpt
-        self.model = Network(inpt,self.actionCnt,True,'duel',cfg.learning_rate,'Q-network').build2() # model
-        self.target_model = Network(inpt,self.actionCnt,True,'duel',cfg.learning_rate, 'Target-network').build2() # target model
+        self.model = Network(inpt,self.actionCnt,True,'duel',cfg.learning_rate,'Q-network').build() # model
+        self.target_model = Network(inpt,self.actionCnt,True,'duel',cfg.learning_rate, 'Target-network').build() # target model
         
         self.target_model.set_weights(self.model.get_weights())
 
@@ -103,6 +104,7 @@ class Agent:
         self.final_model = None
         self.compile()
         #logging
+        self.writer = None
         if cfg.log_path:
             
             self.writer = tf.summary.FileWriter(cfg.log_path,sess.graph)
@@ -208,110 +210,36 @@ class Agent:
             print("r {}".format(batch_r))
         '''
         return loss, np.mean(target)
-    
-    def fit(self, env, num_iterations, max_episode_length=None):
-        """Fit your model to the provided environment.
+    def play(self,env):
+        # intializing loop to fill memory
+        
+        print("Playing")
+        tmp = []
+        pre_s = env.reset()
+        done = False
+        self.shortmem.forget() # forget short term memory for recurrent network 
 
-        This is where you sample actions from your network,
-        collect experience samples and add them to your replay memory,
-        and update your network parameters.
+        for t in itertools.count():
+            tmp.append(pre_s)
+            mem_s = self.preprocessor.process_state_for_memory(pre_s) #scaled and grayscaled
+            net_s = self.preprocessor.process_for_network(mem_s) # normalized
 
-        Parameters
-        ----------
-        env: gym.Env
-          This is the Atari environment. 
-        num_iterations: int
-          How many samples/updates to perform.
-        max_episode_length: int
-          How long a single episode should last before the agent
-          resets. Can help exploration.
-        """
-        is_training = True
-        print("Training starts.")
-        self.save_model()
-        eval_count = 0
-
-        state = env.reset()
-        burn_in = True
-        idx_episode = 1
-        episode_loss = .0
-        episode_frames = 0
-        episode_reward = .0
-        episode_raw_reward = .0
-        episode_target_value = .0
-        for t in range(self.train_start + num_iterations):
-            mem_s = self.preprocessor.process_state_for_memory(state)
-            net_s = self.preprocessor.process_state_for_network(mem_s)
             self.shortmem.add(net_s)
-            
-            action_state = self.shortmem.get()
-            
-            
-            if burn_in:
-                action = np.random.randint(0, self.actionCnt)
-            else:
-                action = self.act(action_state)
 
-            processed_state = mem_s
+            hist_s = self.shortmem.get()[None] # receive the last frames including the most recent frame to make a tensor shape (num_frames,frame_dim)
 
-            state, reward, done, info = env.step(action)
+            act_values = self.model.predict_on_batch(hist_s)
+            a = np.argmax(act_values[0])
 
 
-            processed_reward = self.preprocessor.process_reward(reward)
-
-            self.longmem.add(processed_state, action, processed_reward, done)
-
-            
-            if not burn_in: 
-                episode_frames += 1
-                episode_reward += processed_reward
-                episode_raw_reward += reward
-
+            pre_s_, raw_r, done, info = env.step(a)
+            env.render()
+            pre_s = pre_s_
 
             if done:
-                # adding last frame only to save last state
-                last_frame = self.preprocessor.process_state_for_memory(state)
-                # action, reward, done doesn't matter here
-                self.longmem.add(last_frame, action, 0, done)
-                if not burn_in:
-                    avg_target_value = episode_target_value / episode_frames
-                    print(">>> Training: time %d, episode %d, length %d, reward %.0f, raw_reward %.0f, loss %.4f, target value %.4f, epsilon1 %d, memory cap %d" % 
-                        (t, idx_episode, episode_frames, episode_reward, episode_raw_reward, episode_loss, 
-                        avg_target_value, self.epsilon_policy.epsilon, self.longmem.current))
-                    sys.stdout.flush()
-                    self.save_scalar(idx_episode, 'train/episode_frames', episode_frames)
-                    self.save_scalar(idx_episode, 'train/episode_reward', episode_reward)
-                    self.save_scalar(idx_episode, 'train/episode_raw_reward', episode_raw_reward)
-                    self.save_scalar(idx_episode, 'train/episode_loss', episode_loss)
-                    self.save_scalar(idx_episode, 'train_avg/avg_reward', episode_reward / episode_frames)
-                    self.save_scalar(idx_episode, 'train_avg/avg_target_value', avg_target_value)
-                    self.save_scalar(idx_episode, 'train_avg/avg_loss', episode_loss / episode_frames)
-                    episode_frames = 0
-                    episode_reward = .0
-                    episode_raw_reward = .0
-                    episode_loss = .0
-                    episode_target_value = .0
-                    idx_episode += 1
-                burn_in = (t < self.train_start)
-                state = env.reset()
-
-                self.shortmem.forget()
-
-            if not burn_in:
-                if t % self.train_freq == 0:
-                    loss, target_value = self.replay(self.batch_size)
-                    episode_loss += loss
-                    episode_target_value += target_value
-                # update freq is based on train_freq
-                if t % (self.train_freq * self.target_update_freq) == 0:
-                    # target updates can have the option to be hard or soft
-                    # related functions are defined in deeprl_prj.utils
-                    # here we use hard target update as default
-                    self.target_model.set_weights(self.model.get_weights())
-                if t %50000 == 0:
-                    self.save_model()
-
-        self.save_model()
+                env.close()
+                print("Done playing")
+                return np.array(tmp)
     def init_loop(self,env):
         print("Filling memory with {} episodes".format(self.train_start))
         # intializing loop to fill memory
@@ -331,7 +259,7 @@ class Agent:
                 
                 a = random.randrange(self.actionCnt)
 
-                
+                env.render()
                 pre_s_, raw_r, done, info = env.step(a)
                 
                 r = self.preprocessor.process_reward(raw_r) # reward clipping
@@ -342,7 +270,9 @@ class Agent:
                 pre_s = pre_s_
                 
                 if done:
+                    
                     break
+        env.close()
         print("Done filling memory {}".format(self.longmem.current))
         
     def train(self,env,episodes,render = False):
@@ -400,8 +330,10 @@ class Agent:
                     loss, avg_target = self.replay(self.batch_size)
                     e_loss += loss
                     e_target_val += avg_target
-                
-                  
+                if e % 200 == 0:
+                    clip = self.play(env)
+                    vid = gif(clip,24)
+                    vid.write_gif(self.log_path+"/"+self.name+"-PlayE"+str(e)+".gif",fps=24)
                 pre_s = pre_s_ #loop state back
                 if done:
                     #capture last frame
@@ -419,3 +351,5 @@ class Agent:
                     self.save_scalar(e, 'train_avg/avg_reward', e_r / t)
                     self.save_scalar(e, 'train_avg/avg_loss', e_loss / t)
                     break
+class CustomAgent(Agent):
+    def __init__()

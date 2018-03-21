@@ -1,29 +1,6 @@
-class Policy:
-    """Base class representing an MDP policy.
 
-    Policies are used by the agent to choose actions.
-
-    Policies are designed to be stacked to get interesting behaviors
-    of choices. For instances in a discrete action space the lowest
-    level policy may take in Q-Values and select the action index
-    corresponding to the largest value. If this po`licy is wrapped in
-    an epsilon greedy policy then with some probability epsilon, a
-    random action will be chosen.
-    """
-
-    def select_action(self, **kwargs):
-        """Used by agents to select actions.
-
-        Returns
-        -------
-        Any:
-          An object representing the chosen action. Type depends on
-          the hierarchy of policy instances.
-        """
-        raise NotImplementedError('This method should be overriden.')
         
-        
-class LinearDecayGreedyEpsilonPolicy(Policy):
+class LinearDecayGreedyEpsilonPolicy:
     """Policy with a parameter that decays linearly.
 
     Like GreedyEpsilonPolicy but the epsilon decays from a start value
