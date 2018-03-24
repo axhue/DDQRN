@@ -11,18 +11,15 @@ A Dueling Double Deep Q Recurrent Network implemented to play video games!
 
 ## Results
 
-### Seaquest
-![Playing Seaquest](https://github.com/axhue/minecraftRL/blob/master/results/Seaquest-R20-DDQRN.gif)
+![Playing Seaquest](https://github.com/axhue/minecraftRL/blob/master/results/Seaquest-R20-DDQRN.gif) ![Playing Qbert](https://github.com/axhue/minecraftRL/blob/master/results/QbertR20-results.gif)
 
 And the rewards per episode (runtime was 2 days on P100)
 
-![Rewards Graph](https://github.com/axhue/minecraftRL/blob/master/results/Seaquest-rewards-DDRQN20.png)
-### Qbert
-![Playing Qbert](https://github.com/axhue/minecraftRL/blob/master/results/QbertR20-results.gif)
+![Rewards Graph](https://github.com/axhue/minecraftRL/blob/master/results/Seaquest-rewards-DDRQN20.png) ![Rewards Graph](https://github.com/axhue/minecraftRL/blob/master/results/Qbert-rewards-DDRQN20.png)
 
 And the rewards per episode (runtime was 2 days on P100)
 
-![Rewards Graph](https://github.com/axhue/minecraftRL/blob/master/results/Qbert-rewards-DDRQN20.png)
+
 
 ## How to run the code
 First you need to create the conda environment `conda env create -f environment.yml` and activate
